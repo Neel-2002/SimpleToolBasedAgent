@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # RAG GenAI Project
 
 Production-style Retrieval Augmented Generation system built with LangChain, FAISS, and Google / OpenAI LLMs.
@@ -139,7 +139,4 @@ LLM_PROVIDER=openai
 **Tool-calling agent** — Rather than always running RAG, the agent decides whether a question needs document retrieval (`search_documents`), arithmetic (`calculator`), or neither. This avoids unnecessary API calls and lets the system handle mixed queries naturally.
 
 **Provider abstraction** — `EmbeddingFactory` and `LLMFactory` hide provider-specific imports behind a single `.build()` call, making it trivial to swap Google ↔ OpenAI via environment variables.
-=======
-# Simple_Genai_Agent
-Agent centered aroud tools to answer a query
->>>>>>> 8d77e25ac533b0fc5bb6ab726532bdd6cb491a08
+
