@@ -1,1 +1,1 @@
-# import .spacy from normal
+from .spacy import normalize_documents

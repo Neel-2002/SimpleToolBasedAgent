@@ -1,27 +1,32 @@
-# import spacy
+import spacy
+from langchain_core.documents import Document
 
-# def text_cleaning(text: str):
-#     nlp = spacy.load('en_core_web_sm')
+# Load once (important for performance)
+nlp = spacy.load("en_core_web_sm", disable=["parser", "ner"])
 
+def normalize_text(text: str) -> str:
+    doc = nlp(text)
     
+    tokens = [
+        token.lemma_.lower()
+        for token in doc
+        if not token.is_stop and not token.is_punct
+    ]
+    
+    return " ".join(tokens)
 
 
+def normalize_documents(documents: list[Document]) -> list[Document]:
+    normalized_docs = []
 
+    for doc in documents:
+        cleaned_text = normalize_text(doc.page_content)
 
+        normalized_docs.append(
+            Document(
+                page_content=cleaned_text,
+                metadata=doc.metadata  # keep metadata intact
+            )
+        )
+    return normalized_docs
 
-
-
-
-
-# class CLEAN:
-#     def __init__(self):
-#         self.user_prompt = input("Enter a prompt: ")
-#     def text_cleaning(self):
-#         import spacy
-#         nlp = spacy.load('en_core_web_sm')
-#         docs = nlp(space.user_prompt)
-#         cleaned_tokens = [token.lemma_ for token in docs if not token.is_stop]
-#         return ' '.join(cleaned_tokens)
-# user1 = CLEAN()
-# result = user1.text_cleaning()
-# print(result)

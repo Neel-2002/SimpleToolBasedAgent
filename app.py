@@ -1,6 +1,7 @@
 from config_validator import validate_config
 
 from loaders.document_loader import load_document
+from normalization.spacy import normalize_documents
 from chunkers.semantic_chunker import semantic_chunk_documents
 
 from embeddings.embedding_factory import get_embeddings
@@ -26,6 +27,10 @@ def main():
     print("Loading documents...")
 
     documents = load_document("data/sample_document.txt")
+
+    print('Applying normalization...')
+
+    documents = normalize_documents(documents)
 
     print("Chunking documents...")
 
